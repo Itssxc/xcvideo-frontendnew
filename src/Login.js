@@ -8,15 +8,24 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    alert("Frontend login is for display — use backend for now.");
+    try {
+      await axios.post("https://xcvideo-backendd-1.onrender.com/login", {
+        email,
+        password,
+      }, { withCredentials: true });
+      alert("Login successful");
+      window.location.href = "/dashboard";
+    } catch (err) {
+      alert("Login failed");
+    }
   };
 
   return (
     <form onSubmit={handleLogin} style={{ maxWidth: "400px", margin: "0 auto" }}>
-      <h2>Login</h2>
+      <h2>Log In</h2>
       <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required />
       <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required />
-      <button type="submit" style={{ marginTop: "10px" }}>Login</button>
+      <button type="submit" style={{ marginTop: "10px" }}>Log In</button>
     </form>
   );
 }

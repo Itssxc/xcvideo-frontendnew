@@ -8,7 +8,16 @@ export default function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    alert("Frontend signup is for display — use backend for now.");
+    try {
+      await axios.post("https://xcvideo-backendd-1.onrender.com/signup", {
+        email,
+        password,
+      }, { withCredentials: true });
+      alert("Signup successful. Redirecting to login.");
+      window.location.href = "/login";
+    } catch (err) {
+      alert("Signup failed");
+    }
   };
 
   return (
